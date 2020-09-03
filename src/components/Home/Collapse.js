@@ -5,12 +5,12 @@ class Collapse extends Component {
       displayValue: 'none'
    }
 
-   buttonBgColor = {
-      backgroundColor: '#38444d'
+   setDisplayValue(value) {
+      this.setState({ displayValue: value });
    }
 
    openTags = () => {
-      this.state.displayValue === 'none' ? this.setState({ displayValue: 'block' }) : this.setState({ displayValue: 'none' });
+      this.state.displayValue === 'none' ? this.setDisplayValue('block') : this.setDisplayValue('none');
    }
 
    render() {
@@ -19,11 +19,11 @@ class Collapse extends Component {
       return (
          <React.Fragment>
             <div className="collapse">
-               <button className="collapse__button" style={displayValue === 'none' ? null : this.buttonBgColor} onClick={this.openTags}>
+               <button className="collapse__button" style={displayValue === 'none' ? null : { backgroundColor: '#38444d' }} onClick={this.openTags}>
                   Choose Tag <i className="collapse-button__icon">{displayValue === 'none' ? '+' : '-'}</i>
                </button>
 
-               <div className="collapse__content" style={{ display: this.state.displayValue }}>
+               <div className="collapse__content" style={{ display: displayValue }}>
                   <ul className="collapse-content__list-tag">
                      <li><a href="#">All Articles</a></li>
                      <li><a href="#">HTML</a></li>

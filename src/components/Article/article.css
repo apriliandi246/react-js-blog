@@ -45,19 +45,19 @@
 .head__tag {
    float: left;
    padding: 6px;
-   color: #000000;
+   color: #ffffff;
    font-size: 16px;
-   font-weight: bold;
    text-align: center;
    margin-right: 20px;
+   font-weight: bolder;
    letter-spacing: 1px;
    font-family: monospace;
    text-transform: lowercase;
-   background-color: #ffff00;
+   background-color: #51a97d;
 }
 
 .article-body {
-   margin: 110px 0 70px 0;
+   margin: 100px 0 70px 0;
 }
 
 
@@ -78,11 +78,11 @@
    letter-spacing: 0.5px;
 }
 
-strong {
+.article-body strong {
    font-weight: bold;
 }
 
-em {
+.article-body em {
    font-style: italic;
 }
 
@@ -138,7 +138,7 @@ em {
 
 /* list tag */
 .article-body ul,
-ol {
+.article-body ol {
    margin-left: 40px;
    margin-bottom: 40px;
 }
@@ -193,9 +193,9 @@ ol {
 }
 
 .article-body table,
-th,
-tr,
-td {
+.article-body th,
+.article-body tr,
+.article-body td {
    padding: 13px;
    font-size: 20px;
    word-spacing: 3px;
@@ -210,8 +210,8 @@ td {
 }
 
 .article-body pre,
-code,
-span {
+.article-body code,
+.article-body span {
    font-size: 17px;
    line-height: 30px;
    border-radius: 6px;
