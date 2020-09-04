@@ -222,6 +222,8 @@
 
 /* image tag */
 .article-body p img {
+   height: auto;
    display: block;
+   max-width: 100%;
    margin: 10px auto 40px auto;
 }

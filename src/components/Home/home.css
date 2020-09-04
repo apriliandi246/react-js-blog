@@ -80,13 +80,13 @@
    justify-content: center;
 }
 
-.collapse-content__list-tag a {
+.collapse-content__list-tag .link-tag {
    color: #ffffff;
    text-decoration: none;
    transition: color 0.3s, text-decoration 0.3s;
 }
 
-.collapse-content__list-tag a:hover {
+.collapse-content__list-tag .link-tag:hover {
    color: #8a2be2;
    text-decoration: underline;
 }

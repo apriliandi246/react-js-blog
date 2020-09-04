@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Collapse extends Component {
    state = {
@@ -25,15 +26,15 @@ class Collapse extends Component {
 
                <div className="collapse__content" style={{ display: displayValue }}>
                   <ul className="collapse-content__list-tag">
-                     <li><a href="#">All Articles</a></li>
-                     <li><a href="#">HTML</a></li>
-                     <li><a href="#">CSS</a></li>
-                     <li><a href="#">Node.js</a></li>
-                     <li><a href="#">React.js</a></li>
-                     <li><a href="#">MongoDB</a></li>
-                     <li><a href="#">Markdown</a></li>
-                     <li><a href="#">Javascript</a></li>
-                     <li><a href="#">Express.js</a></li>
+                     <li><Link to="/" className="link-tag">All Articles</Link></li>
+                     <li><Link to="/tag/html" className="link-tag">HTML</Link></li>
+                     <li><Link to="/tag/css" className="link-tag">CSS</Link></li>
+                     <li><Link to="/tag/nodejs" className="link-tag">Node.js</Link></li>
+                     <li><Link to="/tag/reactjs" className="link-tag">React.js</Link></li>
+                     <li><Link to="/tag/mongodb" className="link-tag">MongoDB</Link></li>
+                     <li><Link to="/tag/markdown" className="link-tag">Markdown</Link></li>
+                     <li><Link to="/tag/javascript" className="link-tag">Javascript</Link></li>
+                     <li><Link to="/tag/expressjs" className="link-tag">Express.js</Link></li>
                   </ul>
                </div>
             </div>

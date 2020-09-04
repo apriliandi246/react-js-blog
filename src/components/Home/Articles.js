@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Time } from '../../utils/time';
+
 
 class Articles extends Component {
    render() {
+      const articles = this.props.articles;
+
       return (
          <React.Fragment>
             <div className="articles">
-               <div className="articles__article">
-                  <a href="#" className="article__title">A JavaScript library for building user interfaces</a>
-                  <p className="article__published">April, 06 2000</p>
-                  <div className="article__tag">flutter</div>
-                  <hr className="article__line" />
-               </div>
-
-               <div className="articles__article">
-                  <a href="#" className="article__title">What is Flutter</a>
-                  <p className="article__published">April, 06 2000</p>
-                  <div className="article__tag">flutter</div>
-                  <hr className="article__line" />
-               </div>
-
-               <div className="articles__article">
-                  <a href="#" className="article__title">What is Flutter</a>
-                  <p className="article__published">April, 06 2000</p>
-                  <div className="article__tag">flutter</div>
-                  <hr className="article__line" />
-               </div>
+               {articles.map((article) =>
+                  <div key={article._id} className="articles__article">
+                     <Link to={`/${article.slug}`} className="article__title">{article.title}</Link>
+                     <p className="article__published">{new Time(article.createdAt).format('medium')}</p>
+                     <div className="article__tag">{article.tag}</div>
+                     <hr className="article__line" />
+                  </div>
+               )}
             </div>
          </React.Fragment>
       );
