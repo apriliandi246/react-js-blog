@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Time } from '../../utils/time';
 import Navbar from '../Home/Navbar';
 import Collapse from '../Home/Collapse';
+import Articles from '../Home/Articles';
 import '../Home/home.css'
 
 
@@ -41,16 +40,7 @@ class Tag extends Component {
             <div className="container-home">
                <Collapse />
 
-               <div className="articles">
-                  {articles.length === 0 ? <h1>No Article</h1> : articles.map((article) =>
-                     <div key={article._id} className="articles__article">
-                        <Link to={`/${article.slug}`} className="article__title">{article.title}</Link>
-                        <p className="article__published">{new Time(article.createdAt).format('medium')}</p>
-                        <div className="article__tag">{article.tag}</div>
-                        <hr className="article__line" />
-                     </div>
-                  )}
-               </div>
+               <Articles articles={articles} />
             </div>
          </React.Fragment>
       );

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Time } from '../../utils/time';
+import NoArticle from '../NoArticle';
 
 
 class Articles extends Component {
    render() {
       const articles = this.props.articles;
+
+      if (articles.length === 0) {
+         return <NoArticle />
+      }
 
       return (
          <React.Fragment>
