@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
+import Spinner from '../Spinner';
 import Collapse from './Collapse';
 import Articles from './Articles';
-import Navbar from './Navbar';
 import './home.css';
 
 
@@ -11,7 +12,6 @@ class Home extends Component {
       articles: []
    }
 
-   // get all article
    componentDidMount() {
       axios.get('http://localhost:4000/articles')
          .then(response => {
@@ -20,6 +20,12 @@ class Home extends Component {
    }
 
    render() {
+      const { articles } = this.state;
+
+      if (articles.length < 1) {
+         return <Spinner />
+      }
+
       return (
          <React.Fragment>
             <Navbar />
@@ -28,7 +34,7 @@ class Home extends Component {
                <Collapse />
 
                <Articles
-                  articles={this.state.articles}
+                  articles={articles}
                />
             </div>
          </React.Fragment>

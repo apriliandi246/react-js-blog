@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Time } from '../../utils/time';
-import NoArticle from '../NoArticle';
+import NoArticle from '../NotFound/NoArticle';
 
 
 class Articles extends Component {

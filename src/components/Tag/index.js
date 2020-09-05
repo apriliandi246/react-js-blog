@@ -11,10 +11,9 @@ class Tag extends Component {
       articles: []
    }
 
-   // get articles reference by tag
    getArticle() {
       axios.get(`http://localhost:4000/articles/tag/${this.props.match.params.articleTag}`)
-         .then(response => {
+         .then((response) => {
             this.setState({ articles: response.data })
          })
    }
@@ -23,7 +22,6 @@ class Tag extends Component {
       this.getArticle();
    }
 
-   // if user choose another tag
    componentDidUpdate(prevProps, prevState) {
       if (prevProps.match.params.articleTag !== this.props.match.params.articleTag) {
          this.getArticle();
@@ -31,7 +29,7 @@ class Tag extends Component {
    }
 
    render() {
-      const articles = this.state.articles;
+      const { articles } = this.state;
 
       return (
          <React.Fragment>
@@ -40,7 +38,9 @@ class Tag extends Component {
             <div className="container-home">
                <Collapse />
 
-               <Articles articles={articles} />
+               <Articles
+                  articles={articles}
+               />
             </div>
          </React.Fragment>
       );

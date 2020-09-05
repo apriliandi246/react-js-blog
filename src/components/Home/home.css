@@ -14,10 +14,17 @@
 }
 
 .navbar__logo {
+   color: #ffffff;
    font-size: 28px;
    font-weight: bolder;
    letter-spacing: 10px;
+   text-decoration: none;
    font-family: monospace;
+   transition: color 0.2s;
+}
+
+.navbar__logo:hover {
+   color: #8a2be2;
 }
 
 /* Container */
@@ -57,7 +64,7 @@
 }
 
 .collapse__content {
-   padding: 18px;
+   padding: 5px;
    display: none;
    color: #ffffff;
    font-size: 20px;

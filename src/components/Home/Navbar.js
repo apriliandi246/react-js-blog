@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class Navbar extends Component {
-   render() {
-      return (
-         <React.Fragment>
-            <nav className="navbar">
-               <h3 className="navbar__logo">SOPHIE</h3>
-            </nav>
-         </React.Fragment>
-      );
-   }
+const Navbar = () => {
+   return (
+      <React.Fragment>
+         <nav className="navbar">
+            <Link to="/" className="navbar__logo">SOPHIE</Link>
+         </nav>
+      </React.Fragment>
+   );
 }
 
 export default Navbar;
