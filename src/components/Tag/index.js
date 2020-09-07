@@ -12,7 +12,7 @@ class Tag extends Component {
    }
 
    getArticle() {
-      axios.get(`http://localhost:4000/articles/tag/${this.props.match.params.articleTag}`)
+      axios.get(`http://localhost:4000/api/articles/tag/${this.props.match.params.articleTag}`)
          .then((response) => {
             this.setState({ articles: response.data })
          })

@@ -29,7 +29,7 @@ class Collapse extends Component {
                <div className="collapse__content" style={{ display: displayValue }}>
                   <ul className="collapse-content__list-tag">
                      {tags.map((tag) =>
-                        <li>
+                        <li key={tag}>
                            <Link
                               to={`/tag/${tag}`}
                               className="link-tag">

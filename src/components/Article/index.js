@@ -13,7 +13,7 @@ class Article extends Component {
    }
 
    componentDidMount() {
-      axios.get(`http://localhost:4000/articles/${this.props.match.url}`)
+      axios.get(`http://localhost:4000/api/articles/slug${this.props.match.url}`)
          .then(response => {
             this.setState({ article: response.data })
          })

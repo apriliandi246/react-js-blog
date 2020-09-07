@@ -13,7 +13,7 @@ class Home extends Component {
    }
 
    componentDidMount() {
-      axios.get('http://localhost:4000/articles')
+      axios.get('http://localhost:4000/api/articles')
          .then(response => {
             this.setState({ articles: response.data })
          })
