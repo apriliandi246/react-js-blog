@@ -6,7 +6,7 @@ import NoArticle from '../NotFound/NoArticle';
 
 class Articles extends Component {
    render() {
-      const articles = this.props.articles;
+      const { articles } = this.props;
 
       if (articles.length === 0) {
          return <NoArticle />

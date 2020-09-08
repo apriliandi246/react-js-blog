@@ -4,26 +4,36 @@ import Navbar from './Navbar';
 import Spinner from '../Spinner';
 import Collapse from './Collapse';
 import Articles from './Articles';
+import NoArticle from '../NotFound/NoArticle';
+import { apiEndpoint } from '../../config.json';
 import './home.css';
 
 
 class Home extends Component {
    state = {
-      articles: []
+      articles: [],
+      isLoading: false
    }
 
    componentDidMount() {
-      axios.get('http://localhost:4000/api/articles')
-         .then(response => {
-            this.setState({ articles: response.data })
+      axios.get(apiEndpoint)
+         .then((response) => {
+            this.setState({
+               articles: response.data,
+               isLoading: true
+            });
          })
    }
 
    render() {
-      const { articles } = this.state;
+      const { articles, isLoading } = this.state;
 
-      if (articles.length < 1) {
+      if (articles.length === 0 && isLoading === false) {
          return <Spinner />
+      }
+
+      if (articles.length === 0 && isLoading === true) {
+         return <NoArticle />
       }
 
       return (
@@ -35,6 +45,7 @@ class Home extends Component {
 
                <Articles
                   articles={articles}
+                  isLoading={isLoading}
                />
             </div>
          </React.Fragment>

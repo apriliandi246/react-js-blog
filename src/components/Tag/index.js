@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from '../Home/Navbar';
 import Collapse from '../Home/Collapse';
 import Articles from '../Home/Articles';
+import { apiEndpoint } from '../../config.json';
 import '../Home/home.css'
 
 
@@ -12,10 +13,15 @@ class Tag extends Component {
    }
 
    getArticle() {
-      axios.get(`http://localhost:4000/api/articles/tag/${this.props.match.params.articleTag}`)
+      axios.get(`${apiEndpoint}/tag/${this.props.match.params.articleTag}`)
          .then((response) => {
             this.setState({ articles: response.data })
          })
+         .catch((ex) => {
+            if (ex.response.status === 404) {
+               this.props.history.push('/');
+            }
+         });
    }
 
    componentDidMount() {

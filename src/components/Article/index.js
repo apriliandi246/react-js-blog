@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Time } from '../../utils/time';
 import axios from 'axios';
-import './article.css';
 import Spinner from '../Spinner';
+import { apiEndpoint } from '../../config.json';
+import './article.css';
 
 
 class Article extends Component {
@@ -13,10 +14,15 @@ class Article extends Component {
    }
 
    componentDidMount() {
-      axios.get(`http://localhost:4000/api/articles/slug${this.props.match.url}`)
+      axios.get(`${apiEndpoint}/slug${this.props.match.url}`)
          .then(response => {
             this.setState({ article: response.data })
          })
+         .catch((ex) => {
+            if (ex.response.status === 404) {
+               this.props.history.push('/');
+            }
+         });
    }
 
    render() {

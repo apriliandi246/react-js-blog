@@ -2,17 +2,18 @@ import React from 'react';
 
 const NoArticle = () => {
    const style = {
-      fontSize: "33px",
+      color: "#fff",
+      fontSize: "30px",
       textAlign: "center",
       fontWeight: "bolder",
       letterSpacing: "6px",
-      margin: "100px auto",
+      margin: "150px auto",
       fontFamily: "monospace"
    }
 
    return (
       <div className="no-article">
-         <h1 style={style}>No Article</h1>
+         <h1 style={style}>Article doesn't exists right now 😅</h1>
       </div>
    );
 }

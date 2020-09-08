@@ -22,12 +22,21 @@ class Collapse extends Component {
       return (
          <React.Fragment>
             <div className="collapse">
-               <button className="collapse__button" style={displayValue === 'none' ? { backgroundColor: '#253341' } : { backgroundColor: '#38444d' }} onClick={this.openTags}>
+               <button
+                  className="collapse__button"
+                  style={displayValue === 'none' ? null : { backgroundColor: '#38444d' }}
+                  onClick={this.openTags}>
                   Choose Tag <i className="collapse-button__icon">{displayValue === 'none' ? '+' : '-'}</i>
                </button>
 
                <div className="collapse__content" style={{ display: displayValue }}>
                   <ul className="collapse-content__list-tag">
+                     <li>
+                        <Link to="/" className="link-tag">
+                           all-articles
+                        </Link>
+                     </li>
+
                      {tags.map((tag) =>
                         <li key={tag}>
                            <Link
