@@ -87,21 +87,19 @@
    justify-content: center;
 }
 
-.collapse-content__list-tag .link-tag {
+.link-tag {
    color: #ffffff;
+   cursor: pointer;
+   margin-top: 25px;
+   margin-right: 25px;
+   letter-spacing: 2px;
    text-decoration: none;
    transition: color 0.3s, text-decoration 0.3s;
 }
 
-.collapse-content__list-tag .link-tag:hover {
+.link-tag:hover {
    color: #8a2be2;
    text-decoration: underline;
-}
-
-.collapse-content__list-tag li {
-   margin-top: 25px;
-   margin-right: 25px;
-   letter-spacing: 2px;
 }
 
 

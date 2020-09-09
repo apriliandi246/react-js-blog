@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 
 class Collapse extends Component {
@@ -18,6 +17,7 @@ class Collapse extends Component {
 
    render() {
       const { tags, displayValue } = this.state;
+      const { chooseArticleTag, chooseAllrticles } = this.props;
 
       return (
          <React.Fragment>
@@ -31,20 +31,12 @@ class Collapse extends Component {
 
                <div className="collapse__content" style={{ display: displayValue }}>
                   <ul className="collapse-content__list-tag">
-                     <li>
-                        <Link to="/" className="link-tag">
-                           all-articles
-                        </Link>
-                     </li>
+                     <p onClick={chooseAllrticles} className="link-tag">all-articles</p>
 
                      {tags.map((tag) =>
-                        <li key={tag}>
-                           <Link
-                              to={`/tag/${tag}`}
-                              className="link-tag">
-                              {tag}
-                           </Link>
-                        </li>
+                        <p key={tag} className="link-tag" onClick={() => chooseArticleTag(tag)}>
+                           {tag}
+                        </p>
                      )}
                   </ul>
                </div>

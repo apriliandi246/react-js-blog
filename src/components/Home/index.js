@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import Spinner from '../Spinner';
 import Collapse from './Collapse';
 import Articles from './Articles';
-import NoArticle from '../NotFound/NoArticle';
 import { apiEndpoint } from '../../config.json';
 import './home.css';
 
@@ -12,40 +10,56 @@ import './home.css';
 class Home extends Component {
    state = {
       articles: [],
-      isLoading: false
+      articleTag: ""
    }
 
    componentDidMount() {
-      axios.get(apiEndpoint)
+      this.getAllArticles(apiEndpoint);
+   }
+
+   componentDidUpdate(prevProps, prevState) {
+      if (prevState.articleTag !== this.state.articleTag) {
+         this.getAllArticles(`${apiEndpoint}/tag/${this.state.articleTag}`);
+      }
+   }
+
+   getAllArticles(endpoint) {
+      axios.get(endpoint)
          .then((response) => {
             this.setState({
-               articles: response.data,
-               isLoading: true
+               articles: response.data
             });
          })
+         .catch((ex) => {
+            if (ex.response.status === 404) {
+               this.props.history.push('/');
+            }
+         });
+   }
+
+   chooseArticleTag = (tag) => {
+      this.setState({ articleTag: tag });
+   }
+
+   chooseAllrticles = () => {
+      this.getAllArticles(apiEndpoint);
    }
 
    render() {
-      const { articles, isLoading } = this.state;
-
-      if (articles.length === 0 && isLoading === false) {
-         return <Spinner />
-      }
-
-      if (articles.length === 0 && isLoading === true) {
-         return <NoArticle />
-      }
+      const { articles } = this.state;
 
       return (
          <React.Fragment>
             <Navbar />
 
             <div className="container-home">
-               <Collapse />
+               <Collapse
+                  chooseArticleTag={this.chooseArticleTag}
+                  chooseAllrticles={this.chooseAllrticles}
+               />
 
                <Articles
                   articles={articles}
-                  isLoading={isLoading}
                />
             </div>
          </React.Fragment>

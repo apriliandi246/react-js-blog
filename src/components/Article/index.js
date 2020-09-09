@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import { Time } from '../../utils/time';
 import axios from 'axios';
-import Spinner from '../Spinner';
+import { Time } from '../../utils/time';
 import { apiEndpoint } from '../../config.json';
+import Spinner from '../Spinner';
 import './article.css';
 
 
 class Article extends Component {
    state = {
-      article: {}
+      article: []
    }
 
    componentDidMount() {
@@ -28,7 +28,7 @@ class Article extends Component {
    render() {
       const { article } = this.state;
 
-      if (article.length !== 1) {
+      if (article.length === 0) {
          return <Spinner />
       }
 
@@ -44,7 +44,7 @@ class Article extends Component {
                   <p className="head__published">
                      {new Time(article[0].createdAt).format('medium')}
                   </p>
-                  <div className="head__tag">{article[0].tag}</div>
+                  <span className="head__tag">{article[0].tag}</span>
                </div>
 
                <div className="article-body">

@@ -8,22 +8,20 @@ class Articles extends Component {
    render() {
       const { articles } = this.props;
 
-      if (articles.length === 0) {
-         return <NoArticle />
-      }
-
       return (
          <React.Fragment>
-            <div className="articles">
-               {articles.map((article) =>
-                  <div key={article._id} className="articles__article">
-                     <Link to={`/${article.slug}`} className="article__title">{article.title}</Link>
-                     <p className="article__published">{new Time(article.createdAt).format('medium')}</p>
-                     <div className="article__tag">{article.tag}</div>
-                     <hr className="article__line" />
-                  </div>
-               )}
-            </div>
+            {articles.length === 0 ? <NoArticle /> : (
+               <div className="articles">
+                  {articles.map((article) =>
+                     <div key={article._id} className="articles__article">
+                        <Link to={`/${article.slug}`} className="article__title">{article.title}</Link>
+                        <p className="article__published">{new Time(article.createdAt).format('medium')}</p>
+                        <span className="article__tag">{article.tag}</span>
+                        <hr className="article__line" />
+                     </div>
+                  )}
+               </div>
+            )}
          </React.Fragment>
       );
    }
