@@ -1,0 +1,11 @@
+.no-article {
+   color: #ffffff;
+   font-size: 27px;
+   line-height: 37px;
+   margin: 90px auto;
+   text-align: center;
+   font-weight: bolder;
+   letter-spacing: 4px;
+   font-family: monospace;
+   text-shadow: 1px 1px 10px black;
+}

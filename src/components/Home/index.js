@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Navbar from './Navbar';
-import Collapse from './Collapse';
-import Articles from './Articles';
+import Navbar from '../Navbar/index';
+import Collapse from '../Collapse/index';
+import Articles from '../Articles/index';
 import { apiEndpoint } from '../../config.json';
-import './home.css';
+import './style.css';
 
 
 class Home extends Component {

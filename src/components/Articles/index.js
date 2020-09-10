@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Time } from '../../utils/time';
-import NoArticle from '../NotFound/NoArticle';
+import NoArticle from '../NoArticle/index';
+import './style.css';
 
 
 class Articles extends Component {

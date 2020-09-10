@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Time } from '../../utils/time';
 import { apiEndpoint } from '../../config.json';
 import Spinner from '../Spinner';
-import './article.css';
+import './style.css';
 
 
 class Article extends Component {
