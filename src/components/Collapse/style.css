@@ -6,7 +6,7 @@
    padding: 15px;
    color: #ffffff;
    cursor: pointer;
-   font-size: 18px;
+   font-size: 1.1em;
    text-align: left;
    font-family: monospace;
    box-sizing: border-box;
@@ -26,8 +26,9 @@
 .collapse__content {
    padding: 5px;
    display: none;
+   padding: 27px;
    color: #ffffff;
-   font-size: 20px;
+   font-size: 1.2em;
    overflow: hidden;
    line-height: 24px;
    letter-spacing: 1px;
@@ -50,8 +51,8 @@
 .link-tag {
    color: #ffffff;
    cursor: pointer;
-   margin-top: 25px;
-   margin-right: 25px;
+   margin-top: 27px;
+   margin-right: 28px;
    letter-spacing: 2px;
    text-decoration: none;
    transition: color 0.3s, text-decoration 0.3s;

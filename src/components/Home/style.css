@@ -1,10 +1,31 @@
 /* Container */
 .container-home {
-   width: 700px;
+   width: 91%;
    display: flex;
    color: #ffffff;
    font-family: Ubuntu;
    flex-direction: column;
    justify-content: center;
-   margin: 140px auto 60px auto;
+   margin: 120px auto 60px auto;
+}
+
+
+/* Responsive Breakpoints */
+
+@media screen and (min-width: 620px) {
+   .container-home {
+      width: 67%;
+   }
+}
+
+@media screen and (min-width: 960px) {
+   .container-home {
+      width: 60%;
+   }
+}
+
+@media screen and (min-width: 1200px) {
+   .container-home {
+      width: 33%;
+   }
 }

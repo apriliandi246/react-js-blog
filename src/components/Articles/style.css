@@ -10,8 +10,8 @@
 
 .article__title {
    color: #ffffff;
-   font-size: 30px;
-   line-height: 44px;
+   font-size: 1.8em;
+   line-height: 41px;
    font-weight: bolder;
    letter-spacing: 2px;
    text-decoration: none;
@@ -20,9 +20,10 @@
 
 .article__published {
    color: #5f9ea0;
-   font-size: 20px;
+   font-size: 1.1em;
+   line-height: 25px;
    letter-spacing: 2px;
-   margin: 19px 0 24px 0;
+   margin: 15px 0 20px 0;
    font-family: monospace;
 }
 
@@ -30,7 +31,7 @@
    float: left;
    padding: 6px;
    color: #ffffff;
-   font-size: 16px;
+   font-size: 1em;
    margin-right: 20px;
    text-align: center;
    font-weight: bolder;
@@ -47,4 +48,25 @@
 
 .article__title:hover {
    color: #8a2be2;
+}
+
+
+/* Responsive Breakpoints */
+
+@media screen and (min-width: 620px) {
+   .container {
+      width: 70%;
+   }
+}
+
+@media screen and (min-width: 960px) {
+   .container {
+      width: 67%;
+   }
+}
+
+@media screen and (min-width: 1200px) {
+   .container {
+      width: 38%;
+   }
 }
