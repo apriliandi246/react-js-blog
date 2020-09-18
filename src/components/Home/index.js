@@ -8,9 +8,16 @@ import './style.css';
 
 
 class Home extends Component {
-   state = {
-      articles: [],
-      articleTag: ""
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         articles: [],
+         articleTag: ""
+      }
+
+      this.chooseAllrticles = this.chooseAllrticles.bind(this);
+      this.chooseArticleTag = this.chooseArticleTag.bind(this);
    }
 
    componentDidMount() {
@@ -37,11 +44,11 @@ class Home extends Component {
          });
    }
 
-   chooseArticleTag = (tag) => {
+   chooseArticleTag(tag) {
       this.setState({ articleTag: tag });
    }
 
-   chooseAllrticles = () => {
+   chooseAllrticles() {
       this.getAllArticles(apiEndpoint);
    }
 

@@ -3,17 +3,24 @@ import './style.css';
 
 
 class Collapse extends Component {
-   state = {
-      displayValue: 'none'
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         displayValue: 'none'
+      }
+
+      this.openTags = this.openTags.bind(this);
+   }
+
+   openTags() {
+      this.state.displayValue === 'none' ? this.setDisplayValue('block') : this.setDisplayValue('none');
    }
 
    setDisplayValue(value) {
       this.setState({ displayValue: value });
    }
 
-   openTags = () => {
-      this.state.displayValue === 'none' ? this.setDisplayValue('block') : this.setDisplayValue('none');
-   }
 
    render() {
       const { displayValue } = this.state;

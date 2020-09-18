@@ -9,8 +9,12 @@ import './style.css';
 
 
 class Article extends Component {
-   state = {
-      article: []
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         article: []
+      }
    }
 
    componentDidMount() {

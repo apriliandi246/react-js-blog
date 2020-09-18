@@ -190,6 +190,15 @@
 }
 
 
+/* code tag */
+.article-body pre {
+   padding: 20px;
+   overflow: auto;
+   box-sizing: border-box;
+   background-color: #38444d;
+}
+
+
 /* table tag */
 .article-body table {
    margin: auto;
@@ -265,6 +274,14 @@
 
    .article-body {
       width: 93%;
-      margin-top: 160px;
+      margin-top: 128px;
+   }
+
+   .head__published {
+      font-size: 1.1em;
+   }
+
+   .head__tag {
+      font-size: 0.9em;
    }
 }
