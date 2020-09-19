@@ -1,23 +1,15 @@
-.button-home {
-   width: 92%;
-   margin: 38px auto 50px auto;
-}
-
 .to-home {
    padding: 12px;
-   color: #ffffff;
    font-size: 23px;
    text-align: center;
    border-radius: 5px;
    letter-spacing: 2px;
    text-decoration: none;
    font-family: monospace;
-   transition: color 0.3s, background-color 0.3s;
 }
 
 .to-home:hover {
-   color: #8a2be2;
-   background-color: #192734;
+   text-decoration: underline;
 }
 
 
@@ -25,15 +17,14 @@
 
 .container-article {
    width: 90%;
-   color: #ffffff;
    font-family: Ubuntu;
    margin: 50px auto 25px auto;
 }
 
 .head__title {
    font-size: 2.2em;
-   line-height: 47px;
-   font-weight: bolder;
+   font-weight: 500;
+   line-height: 40px;
    letter-spacing: 2px;
 }
 
@@ -91,11 +82,6 @@
 
 
 /* link tag */
-.article-body a {
-   color: #ffffff;
-   transition: color 0.2s;
-}
-
 .article-body a:hover {
    color: #8a2be2;
 }
@@ -161,13 +147,12 @@
    line-height: 30px;
    font-style: italic;
    margin-bottom: 40px;
-   background-color: #192734;
    border-left: 10px solid #38444d;
    quotes: "\201C""\201D""\2018""\2019";
 }
 
 .article-body blockquote:before {
-   color: #ffffff;
+   color: #cccccc;
    font-size: 3em;
    line-height: 0.1em;
    content: open-quote;
@@ -194,6 +179,7 @@
 .article-body pre {
    padding: 20px;
    overflow: auto;
+   color: #ffffff;
    box-sizing: border-box;
    background-color: #38444d;
 }
@@ -210,10 +196,9 @@
 .article-body tr,
 .article-body td {
    padding: 13px;
-   font-size: 1.2em;
+   font-size: 1.05em;
    word-spacing: 3px;
    margin-bottom: 40px;
-   border: 3px solid #ffffff;
 }
 
 

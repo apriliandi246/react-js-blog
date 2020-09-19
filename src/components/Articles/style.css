@@ -1,21 +1,11 @@
 /* Articles */
-.articles {
-   width: 100%;
-   margin-top: 40px;
-   box-sizing: border-box;
-   border: 1px solid #38444d;
-   background-color: #192734;
-   padding: 45px 35px 25px 35px;
-}
-
 .article__title {
    color: #ffffff;
    font-size: 1.8em;
-   line-height: 41px;
-   font-weight: bolder;
+   font-weight: 500;
+   line-height: 37px;
    letter-spacing: 2px;
    text-decoration: none;
-   transition: color 0.2s;
 }
 
 .article__published {
@@ -47,26 +37,5 @@
 }
 
 .article__title:hover {
-   color: #8a2be2;
-}
-
-
-/* Responsive Breakpoints */
-
-@media screen and (min-width: 620px) {
-   .container {
-      width: 70%;
-   }
-}
-
-@media screen and (min-width: 960px) {
-   .container {
-      width: 67%;
-   }
-}
-
-@media screen and (min-width: 1200px) {
-   .container {
-      width: 38%;
-   }
+   text-decoration: underline;
 }

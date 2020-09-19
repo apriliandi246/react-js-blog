@@ -5,16 +5,14 @@ import axios from 'axios';
 import { Time } from '../../utils/time';
 import { apiEndpoint } from '../../config.json';
 import Spinner from '../Spinner';
+import { styleHomeButton, BodyBackgroundColor } from './style';
 import './style.css';
 
 
 class Article extends Component {
    constructor(props) {
       super(props);
-
-      this.state = {
-         article: []
-      }
+      this.state = { article: [] };
    }
 
    componentDidMount() {
@@ -31,6 +29,7 @@ class Article extends Component {
 
    render() {
       const { article } = this.state;
+      const theme = localStorage.getItem('theme');
 
       if (article.length === 0) {
          return <Spinner />
@@ -38,8 +37,13 @@ class Article extends Component {
 
       return (
          <React.Fragment>
-            <div className="button-home">
-               <Link to="/" className="to-home">&#10229; Home</Link>
+            <BodyBackgroundColor theme={theme} />
+
+            <div className="button-home" style={styleHomeButton}>
+               <Link to="/" className="to-home"
+                  style={{
+                     color: theme === 'light' ? '#000000' : '#ffffff'
+                  }}>&#10229; Home</Link>
             </div>
 
             <div className="container-article">

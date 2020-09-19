@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import axios from 'axios';
 import Navbar from '../Navbar/index';
 import Collapse from '../Collapse/index';
@@ -7,20 +8,40 @@ import { apiEndpoint } from '../../config.json';
 import './style.css';
 
 
+const BodyBackgroundColor = createGlobalStyle`
+   body { background-color: ${(props) => props.theme === 'light' ? '#f5f5f5' : '#15202b'}}
+`;
+
+
 class Home extends Component {
    constructor(props) {
       super(props);
 
       this.state = {
+         theme: "",
          articles: [],
          articleTag: ""
       }
 
+      this.changeTheme = this.changeTheme.bind(this);
       this.chooseAllrticles = this.chooseAllrticles.bind(this);
       this.chooseArticleTag = this.chooseArticleTag.bind(this);
    }
 
    componentDidMount() {
+      if (localStorage.getItem('theme') === 'light') {
+         localStorage.setItem('theme', 'light');
+         this.setState({ theme: localStorage.getItem('theme') });
+
+      } else if (localStorage.getItem('theme') === 'dark') {
+         localStorage.setItem('theme', 'dark');
+         this.setState({ theme: localStorage.getItem('theme') });
+
+      } else {
+         localStorage.setItem('theme', 'light');
+         this.setState({ theme: localStorage.getItem('theme') });
+      }
+
       this.getAllArticles(apiEndpoint);
    }
 
@@ -52,12 +73,19 @@ class Home extends Component {
       this.getAllArticles(apiEndpoint);
    }
 
+   changeTheme() {
+      localStorage.setItem('theme', localStorage.getItem('theme') === 'light' ? 'dark' : 'light');
+      this.setState({ theme: localStorage.getItem('theme') });
+   }
+
    render() {
-      const { articles } = this.state;
+      const { articles, theme } = this.state;
 
       return (
          <React.Fragment>
-            <Navbar />
+            <BodyBackgroundColor theme={theme} />
+
+            <Navbar changeTheme={this.changeTheme} />
 
             <div className="container-home">
                <Collapse

@@ -1,58 +1,47 @@
 import React, { Component } from 'react';
-import './style.css';
+import { CollapseButton, CollapseIcon, CollapseContent, CollapseTags, CollapseTag } from './style';
 
 
 class Collapse extends Component {
    constructor(props) {
       super(props);
-
-      this.state = {
-         displayValue: 'none'
-      }
-
+      this.state = { displayValue: 'none' }
       this.openTags = this.openTags.bind(this);
-   }
-
-   openTags() {
-      this.state.displayValue === 'none' ? this.setDisplayValue('block') : this.setDisplayValue('none');
    }
 
    setDisplayValue(value) {
       this.setState({ displayValue: value });
    }
 
+   openTags() {
+      this.state.displayValue === 'none' ? this.setDisplayValue('block') : this.setDisplayValue('none');
+   }
 
    render() {
+      const theme = localStorage.getItem('theme');;
       const { displayValue } = this.state;
       const { chooseArticleTag, chooseAllrticles } = this.props;
       const tags = ['html', 'css', 'nodejs', 'reactjs', 'mongodb', 'javascript', 'expressjs', 'technology'];
 
       return (
-         <div className="collapse">
-            <button
-               className="collapse__button"
-               style={displayValue === 'none' ? null : { backgroundColor: '#38444d' }}
-               onClick={this.openTags}
-            >
-               Choose Tag <i className="collapse-button__icon">{displayValue === 'none' ? '+' : '-'}</i>
-            </button>
+         <React.Fragment>
+            <CollapseButton onClick={this.openTags} displayValue={displayValue} theme={theme}>
+               Choose Tag
+               <CollapseIcon>{displayValue === 'none' ? '+' : '-'}</CollapseIcon>
+            </CollapseButton>
 
-            <div className="collapse__content" style={{ display: displayValue }}>
-               <ul className="collapse-content__list-tag">
-                  <p className="link-tag" onClick={chooseAllrticles}>all-articles</p>
+            <CollapseContent displayValue={displayValue} theme={theme}>
+               <CollapseTags>
+                  <CollapseTag onClick={chooseAllrticles} theme={theme}>all-articles</CollapseTag>
 
                   {tags.map((tag) =>
-                     <p
-                        key={tag}
-                        className="link-tag"
-                        onClick={() => chooseArticleTag(tag)}
-                     >
+                     <CollapseTag key={tag} onClick={() => chooseArticleTag(tag)} theme={theme}>
                         {tag}
-                     </p>
+                     </CollapseTag>
                   )}
-               </ul>
-            </div>
-         </div>
+               </CollapseTags>
+            </CollapseContent>
+         </React.Fragment>
       );
    }
 }

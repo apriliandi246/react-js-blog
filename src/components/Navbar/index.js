@@ -1,12 +1,13 @@
 import React from 'react';
-import './style.css';
+import { NavbarStyle, NavbarLogo } from './style';
 
+const Navbar = (props) => {
+   const theme = localStorage.getItem('theme');
 
-const Navbar = () => {
    return (
-      <nav className="navbar">
-         <div className="navbar__logo"></div>
-      </nav>
+      <NavbarStyle theme={theme}>
+         <NavbarLogo onClick={props.changeTheme} />
+      </NavbarStyle>
    );
 }
 
