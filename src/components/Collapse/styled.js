@@ -19,7 +19,7 @@ export const CollapseTag = styled.p`
    margin-right: 28px;
    letter-spacing: 2px;
    text-decoration: none;
-   color: ${(props) => props.theme === 'light' ? '#000000' : '#ffffff'};
+   transition: color 0.2s;
 
    &:hover {
       text-decoration: underline;
@@ -36,13 +36,13 @@ export const CollapseButton = styled.button`
    text-align: left;
    font-family: monospace;
    box-sizing: border-box;
-   transition: background-color 0.2s;
-   color: ${(props) => props.theme === 'light' ? '#000000' : '#ffffff'};
-   background-color: ${(props) => props.theme === 'light' ? ' #fafafa' : '#253341'};
-   box-shadow: ${(props) => props.theme === 'light' ? '0 0 1px 1px #0000001a' : 'none'};
+   color: ${({ theme }) => theme.fontColor};
+   transition: color 0.2s, background-color 0.2s, border 0.2s, box-shadow 0.2s;
+   background-color: ${({ theme }) => theme.collapseBgColor};
+   box-shadow: ${({ theme }) => theme.collapseBoxShadow};
 
    &:hover {
-      background-color: ${(props) => props.theme === 'light' ? '#f3ebea' : '#38444d'};
+      background-color: ${({ theme }) => theme.collapseBgColor};
    }
 `;
 
@@ -55,9 +55,11 @@ export const CollapseContent = styled.div`
    box-sizing: border-box;
    font-family: monospace;
    display: ${(props) => props.displayValue};
-   background-color: ${(props) => props.theme === 'light' ? '#fafafa' : '#192734'};
-   box-shadow: ${(props) => props.theme === 'light' ? '0 0 1px 1px #0000001a' : 'none'};
-   border-left: ${(props) => props.theme === 'light' ? '1px solid #f3ebea' : '1px solid #253341'};
-   border-right: ${(props) => props.theme === 'light' ? '1px solid #f3ebea' : '1px solid #253341'};
-   border-bottom: ${(props) => props.theme === 'light' ? '1px solid #f3ebea' : '1px solid #253341'};
+   color: ${({ theme }) => theme.fontColor};
+   transition: background-color 0.2s, border 0.2s, box-shadow 0.2s;
+   background-color: ${({ theme }) => theme.collapseContentBgColor};
+   box-shadow: ${({ theme }) => theme.collapseBoxShadow};
+   border-left: ${({ theme }) => theme.collapseBorderContent};
+   border-right: ${({ theme }) => theme.collapseBorderContent};
+   border-bottom: ${({ theme }) => theme.collapseBorderContent};
 `;

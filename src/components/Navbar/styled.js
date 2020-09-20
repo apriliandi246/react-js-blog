@@ -12,8 +12,9 @@ export const NavbarStyle = styled.nav`
    overflow: hidden;
    align-items: center;
    justify-content: space-around;
-   background-color: ${(props) => props.theme === 'light' ? '#fafafa' : '#15202b'};
-   box-shadow: ${(props) => props.theme === 'light' ? '0 0 1.2px 1.2px #0000001a' : '0 0 2px 4px #404a4d33'};
+   transition: background-color 0.2s, box-shadow 0.2s; 
+   box-shadow: ${({ theme }) => theme.navbarBoxShadow};
+   background-color: ${({ theme }) => theme.backgroundComponent};
 `;
 
 export const NavbarLogo = styled.div`

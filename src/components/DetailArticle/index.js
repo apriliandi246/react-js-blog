@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Time } from '../../utils/time';
 import { apiEndpoint } from '../../config.json';
 import Spinner from '../Spinner';
-import { styleHomeButton, BodyBackgroundColor } from './style';
+import { styleHomeButton, BodyBackgroundColor } from './styled';
 import './style.css';
 
 

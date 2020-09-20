@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CollapseButton, CollapseIcon, CollapseContent, CollapseTags, CollapseTag } from './style';
+import { CollapseButton, CollapseIcon, CollapseContent, CollapseTags, CollapseTag } from './styled';
 
 
 class Collapse extends Component {
@@ -18,19 +18,18 @@ class Collapse extends Component {
    }
 
    render() {
-      const theme = localStorage.getItem('theme');;
       const { displayValue } = this.state;
-      const { chooseArticleTag, chooseAllrticles } = this.props;
+      const { chooseArticleTag, chooseAllrticles, theme } = this.props;
       const tags = ['html', 'css', 'nodejs', 'reactjs', 'mongodb', 'javascript', 'expressjs', 'technology'];
 
       return (
          <React.Fragment>
-            <CollapseButton onClick={this.openTags} displayValue={displayValue} theme={theme}>
+            <CollapseButton onClick={this.openTags} displayValue={displayValue}>
                Choose Tag
                <CollapseIcon>{displayValue === 'none' ? '+' : '-'}</CollapseIcon>
             </CollapseButton>
 
-            <CollapseContent displayValue={displayValue} theme={theme}>
+            <CollapseContent displayValue={displayValue}>
                <CollapseTags>
                   <CollapseTag onClick={chooseAllrticles} theme={theme}>all-articles</CollapseTag>
 

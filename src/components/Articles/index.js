@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Time } from '../../utils/time';
-import { ArticleContainer } from './style';
+import { ArticleContainer } from './styled';
 import NoArticle from '../NoArticle/index';
 import './style.css';
 
 
 class Articles extends Component {
    render() {
-      const { articles } = this.props;
-      const theme = localStorage.getItem('theme');
+      const { articles, theme } = this.props;
 
       return (
          <React.Fragment>
             {articles.length === 0 ? <NoArticle /> : (
-               <ArticleContainer theme={theme}>
+               <ArticleContainer>
                   {articles.map((article) =>
                      <div key={article._id} className="articles__article">
-                        <Link to={`/${article.slug}`} className="article__title" style={{ color: theme === 'light' ? '#000000' : null }}>
+                        <Link to={`/${article.slug}`} className="article__title"
+                           style={{
+                              color: theme === 'light' ? '#000000' : null,
+                              transition: 'color 0.2s'
+                           }}>
                            {article.title}
                         </Link>
                         <p className="article__published">{new Time(article.createdAt).format('medium')}</p>

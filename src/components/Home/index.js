@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import Navbar from '../Navbar/index';
 import Collapse from '../Collapse/index';
 import Articles from '../Articles/index';
-import { apiEndpoint } from '../../config.json';
+import { GlobalStyle } from './styled';
+import { lightTheme, darkTheme } from '../Theme/index';
 import './style.css';
+import { apiEndpoint } from '../../config.json';
 
-
-const BodyBackgroundColor = createGlobalStyle`
-   body { background-color: ${(props) => props.theme === 'light' ? '#f5f5f5' : '#15202b'}}
-`;
 
 
 class Home extends Component {
@@ -18,9 +16,9 @@ class Home extends Component {
       super(props);
 
       this.state = {
-         theme: "",
          articles: [],
-         articleTag: ""
+         articleTag: "",
+         theme: 'dark',
       }
 
       this.changeTheme = this.changeTheme.bind(this);
@@ -29,19 +27,6 @@ class Home extends Component {
    }
 
    componentDidMount() {
-      if (localStorage.getItem('theme') === 'light') {
-         localStorage.setItem('theme', 'light');
-         this.setState({ theme: localStorage.getItem('theme') });
-
-      } else if (localStorage.getItem('theme') === 'dark') {
-         localStorage.setItem('theme', 'dark');
-         this.setState({ theme: localStorage.getItem('theme') });
-
-      } else {
-         localStorage.setItem('theme', 'light');
-         this.setState({ theme: localStorage.getItem('theme') });
-      }
-
       this.getAllArticles(apiEndpoint);
    }
 
@@ -59,6 +44,7 @@ class Home extends Component {
             });
          })
          .catch((ex) => {
+            console.log(ex);
             if (ex.response.status === 404) {
                this.props.history.push('/');
             }
@@ -74,30 +60,33 @@ class Home extends Component {
    }
 
    changeTheme() {
-      localStorage.setItem('theme', localStorage.getItem('theme') === 'light' ? 'dark' : 'light');
-      this.setState({ theme: localStorage.getItem('theme') });
+      this.setState({ theme: this.state.theme === 'light' ? 'dark' : 'light' })
    }
 
    render() {
       const { articles, theme } = this.state;
 
       return (
-         <React.Fragment>
-            <BodyBackgroundColor theme={theme} />
+         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <React.Fragment>
+               <GlobalStyle />
 
-            <Navbar changeTheme={this.changeTheme} />
+               <Navbar changeTheme={this.changeTheme} />
 
-            <div className="container-home">
-               <Collapse
-                  chooseArticleTag={this.chooseArticleTag}
-                  chooseAllrticles={this.chooseAllrticles}
-               />
+               <div className="container-home">
+                  <Collapse
+                     theme={theme}
+                     chooseArticleTag={this.chooseArticleTag}
+                     chooseAllrticles={this.chooseAllrticles}
+                  />
 
-               <Articles
-                  articles={articles}
-               />
-            </div>
-         </React.Fragment>
+                  <Articles
+                     theme={theme}
+                     articles={articles}
+                  />
+               </div>
+            </React.Fragment>
+         </ThemeProvider>
       );
    }
 }
