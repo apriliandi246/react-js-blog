@@ -1,3 +1,9 @@
+.button-home {
+   width: 92%;
+   font-weight: 480;
+   margin: 38px auto 50px auto;
+}
+
 .to-home {
    padding: 12px;
    font-size: 23px;

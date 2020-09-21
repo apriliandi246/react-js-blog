@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import { Time } from '../../utils/time';
-import { apiEndpoint } from '../../config.json';
 import Spinner from '../Spinner';
-import { styleHomeButton, BodyBackgroundColor } from './styled';
+import { darkTheme, lightTheme } from '../Theme/index'
+import { GlobalStyle } from './styled';
 import './style.css';
+import { apiEndpoint } from '../../config.json';
 
 
 class Article extends Component {
    constructor(props) {
       super(props);
-      this.state = { article: [] };
+
+      this.state = {
+         article: [],
+         theme: window.localStorage.getItem('theme')
+      };
    }
 
    componentDidMount() {
@@ -28,40 +34,36 @@ class Article extends Component {
    }
 
    render() {
-      const { article } = this.state;
-      const theme = localStorage.getItem('theme');
+      const { article, theme } = this.state;
 
       if (article.length === 0) {
          return <Spinner />
       }
 
       return (
-         <React.Fragment>
-            <BodyBackgroundColor theme={theme} />
+         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <React.Fragment>
+               <GlobalStyle />
 
-            <div className="button-home" style={styleHomeButton}>
-               <Link to="/" className="to-home"
-                  style={{
-                     color: theme === 'light' ? '#000000' : '#ffffff'
-                  }}>&#10229; Home</Link>
-            </div>
-
-            <div className="container-article">
-               <div className="head">
-                  <h1 className="head__title">{article[0].title}</h1>
-                  <p className="head__published">
-                     {new Time(article[0].createdAt).format('medium')}
-                  </p>
-                  <span className="head__tag">{article[0].tag}</span>
+               <div className="button-home">
+                  <Link to="/" className="to-home" style={{ color: theme === 'light' ? '#000000' : '#ffffff' }}>&#10229; Home</Link>
                </div>
 
-               <div className="article-body">
-                  <ReactMarkdown
-                     source={article[0].markdown}
-                  />
+               <div className="container-article">
+                  <div className="head">
+                     <h1 className="head__title">{article[0].title}</h1>
+                     <p className="head__published">{new Time(article[0].createdAt).format('medium')}</p>
+                     <span className="head__tag">{article[0].tag}</span>
+                  </div>
+
+                  <div className="article-body">
+                     <ReactMarkdown
+                        source={article[0].markdown}
+                     />
+                  </div>
                </div>
-            </div>
-         </React.Fragment>
+            </React.Fragment>
+         </ThemeProvider>
       );
    }
 }

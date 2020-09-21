@@ -33,7 +33,6 @@
 
 .article__line {
    margin: 115px 0 50px 0;
-   transition: border 0.2s;
    border: 1px solid #253341;
 }
 

@@ -37,7 +37,6 @@ export const CollapseButton = styled.button`
    font-family: monospace;
    box-sizing: border-box;
    color: ${({ theme }) => theme.fontColor};
-   transition: color 0.2s, background-color 0.2s, border 0.2s, box-shadow 0.2s;
    background-color: ${({ theme }) => theme.collapseBgColor};
    box-shadow: ${({ theme }) => theme.collapseBoxShadow};
 
@@ -54,12 +53,11 @@ export const CollapseContent = styled.div`
    letter-spacing: 1px;
    box-sizing: border-box;
    font-family: monospace;
-   display: ${(props) => props.displayValue};
    color: ${({ theme }) => theme.fontColor};
-   transition: background-color 0.2s, border 0.2s, box-shadow 0.2s;
-   background-color: ${({ theme }) => theme.collapseContentBgColor};
+   display: ${(props) => props.displayValue};
    box-shadow: ${({ theme }) => theme.collapseBoxShadow};
    border-left: ${({ theme }) => theme.collapseBorderContent};
    border-right: ${({ theme }) => theme.collapseBorderContent};
    border-bottom: ${({ theme }) => theme.collapseBorderContent};
+   background-color: ${({ theme }) => theme.collapseContentBgColor};
 `;

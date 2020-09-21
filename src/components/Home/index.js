@@ -10,7 +10,6 @@ import './style.css';
 import { apiEndpoint } from '../../config.json';
 
 
-
 class Home extends Component {
    constructor(props) {
       super(props);
@@ -18,7 +17,7 @@ class Home extends Component {
       this.state = {
          articles: [],
          articleTag: "",
-         theme: 'dark',
+         theme: window.localStorage.getItem('theme'),
       }
 
       this.changeTheme = this.changeTheme.bind(this);
@@ -60,7 +59,8 @@ class Home extends Component {
    }
 
    changeTheme() {
-      this.setState({ theme: this.state.theme === 'light' ? 'dark' : 'light' })
+      window.localStorage.setItem('theme', this.state.theme === 'light' ? 'dark' : 'light');
+      this.setState({ theme: window.localStorage.getItem('theme') });
    }
 
    render() {

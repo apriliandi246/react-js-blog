@@ -12,7 +12,6 @@ export const NavbarStyle = styled.nav`
    overflow: hidden;
    align-items: center;
    justify-content: space-around;
-   transition: background-color 0.2s, box-shadow 0.2s; 
    box-shadow: ${({ theme }) => theme.navbarBoxShadow};
    background-color: ${({ theme }) => theme.backgroundComponent};
 `;

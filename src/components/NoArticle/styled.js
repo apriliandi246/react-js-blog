@@ -7,6 +7,5 @@ export const Message = styled.h1`
    text-align: center;
    letter-spacing: 4px;
    font-family: monospace;
-   transition: color 0.2s;
    color: ${({ theme }) => theme.fontColor};
 `;
