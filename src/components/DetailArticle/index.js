@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { ThemeProvider } from 'styled-components';
@@ -11,48 +11,36 @@ import './style.css';
 import { apiEndpoint } from '../../config.json';
 
 
-class Article extends Component {
-   constructor(props) {
-      super(props);
+export default function Article(props) {
+   const [article, setArticle] = useState([]);
+   const [theme] = useState(window.localStorage.getItem("theme"));
 
-      this.state = {
-         article: [],
-         theme: window.localStorage.getItem('theme')
-      };
-   }
-
-   componentDidMount() {
-      axios.get(`${apiEndpoint}/slug${this.props.match.url}`)
+   useEffect(() => {
+      axios.get(`${apiEndpoint}/slug${props.match.url}`)
          .then(response => {
-            this.setState({ article: response.data })
+            setArticle(response.data);
          })
          .catch((ex) => {
             if (ex.response.status === 404) {
-               this.props.history.push('/');
+               props.history.push('/');
             }
          });
-   }
+   });
 
-   render() {
-      const { article, theme } = this.state;
+   return (
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+         <React.Fragment>
+            <GlobalStyle />
 
-      if (article.length === 0) {
-         return <Spinner />
-      }
+            <div className="button-home">
+               <Link to="/" className="to-home" style={{ color: theme === "light" ? "#000000" : "#ffffff" }}>&#10229; Home</Link>
+            </div>
 
-      return (
-         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            <React.Fragment>
-               <GlobalStyle />
-
-               <div className="button-home">
-                  <Link to="/" className="to-home" style={{ color: theme === 'light' ? '#000000' : '#ffffff' }}>&#10229; Home</Link>
-               </div>
-
+            {article.length === 0 ? <Spinner /> : (
                <div className="container-article">
                   <div className="head">
                      <h1 className="head__title">{article[0].title}</h1>
-                     <p className="head__published">{new Time(article[0].createdAt).format('medium')}</p>
+                     <p className="head__published">{new Time(article[0].createdAt).format("medium")}</p>
                      <span className="head__tag">{article[0].tag}</span>
                   </div>
 
@@ -62,10 +50,8 @@ class Article extends Component {
                      />
                   </div>
                </div>
-            </React.Fragment>
-         </ThemeProvider>
-      );
-   }
+            )}
+         </React.Fragment>
+      </ThemeProvider>
+   );
 }
-
-export default Article;

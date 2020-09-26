@@ -2,8 +2,6 @@ import React from 'react';
 import { Message } from './styled';
 
 
-const NoArticle = () => {
+export default function NoArticle() {
    return <Message>Article Not Found</Message>
 }
-
-export default NoArticle;
