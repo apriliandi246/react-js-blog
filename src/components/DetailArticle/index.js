@@ -14,9 +14,13 @@ import { apiEndpoint } from '../../config.json';
 export default function Article(props) {
    const [article, setArticle] = useState([]);
    const [theme] = useState(window.localStorage.getItem("theme"));
+   const CancelToken = axios.CancelToken;
+   const source = CancelToken.source();
 
    useEffect(() => {
-      axios.get(`${apiEndpoint}/slug${props.match.url}`)
+      axios.get(`${apiEndpoint}/slug${props.match.url}`, {
+         cancelToken: source.token
+      })
          .then(response => {
             setArticle(response.data);
          })

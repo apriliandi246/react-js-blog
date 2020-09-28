@@ -13,11 +13,17 @@ import './style.css';
 export default function Home() {
    const [articles, setArticles] = useState([]);
    const [articleTag, setArticleTag] = useState("");
-   const [theme, setTheme] = useState(window.localStorage.getItem('theme'));
+   const [theme, setTheme] = useState(window.localStorage.getItem("theme"));
+   const CancelToken = axios.CancelToken;
+   const source = CancelToken.source();
 
    useEffect(() => {
-      articleTag === "" ? getAllArticles(apiEndpoint) : getAllArticles(`${apiEndpoint}/tag/${articleTag}`);
-   }, [articles, articleTag]);
+      articleTag === "" ? getAllArticles(apiEndpoint) : getAllArticles("${apiEndpoint}/tag/${articleTag}");
+
+      return () => {
+         controller.abort();
+      }
+   });
 
    function chooseAllArticles() {
       setArticleTag("");
@@ -29,19 +35,21 @@ export default function Home() {
    }
 
    function changeTheme() {
-      window.localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
-      setTheme(window.localStorage.getItem('theme'));
+      window.localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+      setTheme(window.localStorage.getItem("theme"));
    }
 
    function getAllArticles(endpoint) {
-      axios.get(endpoint)
+      axios.get(endpoint, {
+         cancelToken: source.token
+      })
          .then((response) => {
             setArticles(response.data);
          })
    }
 
    return (
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
          <React.Fragment>
             <GlobalStyle />
 
