@@ -21,7 +21,7 @@ export default function Home() {
       articleTag === "" ? getAllArticles(apiEndpoint) : getAllArticles("${apiEndpoint}/tag/${articleTag}");
 
       return () => {
-         controller.abort();
+         source.cancel();
       }
    });
 

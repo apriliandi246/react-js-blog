@@ -29,6 +29,10 @@ export default function Article(props) {
                props.history.push('/');
             }
          });
+
+      return () => {
+         source.cancel();
+      }
    });
 
    return (
