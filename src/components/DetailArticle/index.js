@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { ThemeProvider } from 'styled-components';
@@ -11,22 +11,22 @@ import './style.css';
 import { apiEndpoint } from '../../config.json';
 
 
-export default function Article(props) {
-   const [article, setArticle] = useState([]);
-   const [theme] = useState(window.localStorage.getItem("theme"));
+export default function Article({ history, match }) {
+   const [article, setArticle] = React.useState([]);
+   const [theme] = React.useState(window.localStorage.getItem("theme"));
    const CancelToken = axios.CancelToken;
    const source = CancelToken.source();
 
-   useEffect(() => {
-      axios.get(`${apiEndpoint}/slug${props.match.url}`, {
+   React.useEffect(() => {
+      axios.get(`${apiEndpoint}/slug${match.url}`, {
          cancelToken: source.token
       })
-         .then(response => {
+         .then((response) => {
             setArticle(response.data);
          })
          .catch((ex) => {
-            if (ex.response.status === 404) {
-               props.history.push('/');
+            if (ex.response && ex.response.status === 404) {
+               history.push("/");
             }
          });
 

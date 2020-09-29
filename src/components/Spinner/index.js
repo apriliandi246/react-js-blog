@@ -3,5 +3,5 @@ import './style.css';
 
 
 export default function Spinner() {
-   return <div className="spinner-1"></div>
+   return <div className="spinner"></div>
 }

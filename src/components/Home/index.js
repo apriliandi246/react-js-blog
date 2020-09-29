@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import Navbar from '../Navbar/index';
@@ -11,14 +11,19 @@ import './style.css';
 
 
 export default function Home() {
-   const [articles, setArticles] = useState([]);
-   const [articleTag, setArticleTag] = useState("");
-   const [theme, setTheme] = useState(window.localStorage.getItem("theme"));
+   const [articles, setArticles] = React.useState([]);
+   const [articleTag, setArticleTag] = React.useState("");
+   const [theme, setTheme] = React.useState(window.localStorage.getItem("theme"));
    const CancelToken = axios.CancelToken;
    const source = CancelToken.source();
 
-   useEffect(() => {
-      articleTag === "" ? getAllArticles(apiEndpoint) : getAllArticles("${apiEndpoint}/tag/${articleTag}");
+   React.useEffect(() => {
+      if (articleTag === "") {
+         getAllArticles(apiEndpoint);
+
+      } else {
+         getAllArticles(`${apiEndpoint}/tag/${articleTag}`);
+      }
 
       return () => {
          source.cancel();
@@ -46,6 +51,9 @@ export default function Home() {
          .then((response) => {
             setArticles(response.data);
          })
+         .catch((ex) => {
+
+         });
    }
 
    return (

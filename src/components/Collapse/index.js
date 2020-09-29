@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CollapseButton, CollapseIcon, CollapseContent, CollapseTags, CollapseTag } from './styled';
 
 
 export default function Collapse({ chooseArticleTag, chooseAllrticles, theme }) {
-   const [displayValue, setDisplayValue] = useState("none");
-   const [tags] = useState(['html', 'css', 'nodejs', 'reactjs', 'mongodb', 'javascript', 'expressjs', 'technology']);
+   const [displayValue, setDisplayValue] = React.useState("none");
+   const [tags] = React.useState(["html", "css", "nodejs", "reactjs", "mongodb", "javascript", "expressjs", "technology"]);
 
    function openTags() {
-      displayValue === 'none' ? setDisplayValue('block') : setDisplayValue('none');
+      if (displayValue === "none") {
+         setDisplayValue("block");
+
+      } else {
+         setDisplayValue("none");
+      }
    }
 
    return (
       <React.Fragment>
          <CollapseButton onClick={openTags} displayValue={displayValue}>
             Choose Tag
-               <CollapseIcon>{displayValue === 'none' ? '+' : '-'}</CollapseIcon>
+               <CollapseIcon>{displayValue === "none" ? "+" : "-"}</CollapseIcon>
          </CollapseButton>
 
          <CollapseContent displayValue={displayValue}>
