@@ -12,10 +12,10 @@ import { apiEndpoint } from "../../config.json";
 
 
 export default function Article({ history, match }) {
-   const [article, setArticle] = React.useState([]);
-   const [theme] = React.useState(window.localStorage.getItem("theme"));
    const CancelToken = axios.CancelToken;
    const source = CancelToken.source();
+   const [article, setArticle] = React.useState([]);
+   const [theme] = React.useState(window.localStorage.getItem("theme"));
 
    React.useEffect(() => {
       axios.get(`${apiEndpoint}/slug${match.url}`, {
@@ -41,7 +41,13 @@ export default function Article({ history, match }) {
             <GlobalStyle />
 
             <div className="button-home">
-               <Link to="/" className="to-home" style={{ color: theme === "light" ? "#000000" : "#ffffff" }}>&#10229; Home</Link>
+               <Link
+                  to="/"
+                  className="to-home"
+                  style={{ color: theme === "light" ? "#000000" : "#ffffff" }}
+               >
+                  &#10229; Home
+               </Link>
             </div>
 
             {article.length === 0 ? <Spinner /> : (

@@ -11,11 +11,11 @@ import "./style.css";
 
 
 export default function Home() {
+   const CancelToken = axios.CancelToken;
+   const source = CancelToken.source();
    const [articles, setArticles] = React.useState([]);
    const [articleTag, setArticleTag] = React.useState("");
    const [theme, setTheme] = React.useState(window.localStorage.getItem("theme"));
-   const CancelToken = axios.CancelToken;
-   const source = CancelToken.source();
 
    React.useEffect(() => {
       if (articleTag === "") {
