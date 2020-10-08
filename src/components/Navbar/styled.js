@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Logo from './logo.png';
+import styled from "styled-components";
+import Logo from "./logo.png";
 
 export const NavbarStyle = styled.nav` 
    top: 0;

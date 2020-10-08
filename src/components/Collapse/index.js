@@ -1,32 +1,34 @@
-import React from 'react';
-import { CollapseButton, CollapseIcon, CollapseContent, CollapseTags, CollapseTag } from './styled';
+import React from "react";
+import { CollapseButton, CollapseIcon, CollapseContent, CollapseTags, CollapseTag } from "./styled";
 
 
 export default function Collapse({ chooseArticleTag, chooseAllrticles, theme }) {
-   const [displayValue, setDisplayValue] = React.useState("none");
-   const [tags] = React.useState(["html", "css", "nodejs", "reactjs", "mongodb", "javascript", "expressjs", "technology"]);
+   const collapseContentRef = React.useRef(null)
+   const tags = React.useRef(["html", "css", "nodejs", "reactjs", "mongodb", "javascript", "expressjs", "technology"]);
 
    function openTags() {
-      if (displayValue === "none") {
-         setDisplayValue("block");
+      const collapseContent = collapseContentRef.current.style;
+
+      if (collapseContent.display === "none" || collapseContent.display === "") {
+         collapseContent.display = "block";
 
       } else {
-         setDisplayValue("none");
+         collapseContent.display = "none";
       }
    }
 
    return (
       <React.Fragment>
-         <CollapseButton onClick={openTags} displayValue={displayValue}>
+         <CollapseButton onClick={openTags}>
             Choose Tag
-               <CollapseIcon>{displayValue === "none" ? "+" : "-"}</CollapseIcon>
+               <CollapseIcon>+</CollapseIcon>
          </CollapseButton>
 
-         <CollapseContent displayValue={displayValue}>
+         <CollapseContent ref={collapseContentRef}>
             <CollapseTags>
                <CollapseTag onClick={chooseAllrticles} theme={theme}>all-articles</CollapseTag>
 
-               {tags.map((tag) =>
+               {tags.current.map((tag) =>
                   <CollapseTag key={tag} onClick={() => chooseArticleTag(tag)} theme={theme}>
                      {tag}
                   </CollapseTag>

@@ -1,13 +1,13 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import axios from 'axios';
-import Navbar from '../Navbar/index';
-import Collapse from '../Collapse/index';
-import Articles from '../Articles/index';
-import { apiEndpoint } from '../../config.json';
-import { GlobalStyle } from './styled';
-import { lightTheme, darkTheme } from '../Theme/index';
-import './style.css';
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import axios from "axios";
+import Navbar from "../Navbar/index";
+import Collapse from "../Collapse/index";
+import Articles from "../Articles/index";
+import { apiEndpoint } from "../../config.json";
+import { GlobalStyle } from "./styled";
+import { lightTheme, darkTheme } from "../Theme/index";
+import "./style.css";
 
 
 export default function Home() {

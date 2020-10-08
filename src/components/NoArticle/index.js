@@ -1,5 +1,5 @@
-import React from 'react';
-import { Message } from './styled';
+import React from "react";
+import { Message } from "./styled";
 
 
 export default function NoArticle() {

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import { ThemeProvider } from 'styled-components';
-import axios from 'axios';
-import { Time } from '../../utils/time';
-import Spinner from '../Spinner';
-import { darkTheme, lightTheme } from '../Theme/index'
-import { GlobalStyle } from './styled';
-import './style.css';
-import { apiEndpoint } from '../../config.json';
+import React from "react";
+import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { ThemeProvider } from "styled-components";
+import axios from "axios";
+import { Time } from "../../utils/time";
+import Spinner from "../Spinner";
+import { darkTheme, lightTheme } from "../Theme/index"
+import { GlobalStyle } from "./styled";
+import "./style.css";
+import { apiEndpoint } from "../../config.json";
 
 
 export default function Article({ history, match }) {

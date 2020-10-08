@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import NoArticle from '../NoArticle/index';
-import { Time } from '../../utils/time';
-import { ArticleContainer } from './styled';
-import './style.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import NoArticle from "../NoArticle/index";
+import { Time } from "../../utils/time";
+import { ArticleContainer } from "./styled";
+import "./style.css";
 
 
 export default function Articles({ articles, theme }) {
@@ -17,7 +17,7 @@ export default function Articles({ articles, theme }) {
                         {article.title}
                      </Link>
 
-                     <p className="article__published">{new Time(article.createdAt).format('medium')}</p>
+                     <p className="article__published">{new Time(article.createdAt).format("medium")}</p>
                      <span className="article__tag">{article.tag}</span>
                      <hr className="article__line" style={{ border: theme === "light" ? "1px solid #dfdfdf" : null }} />
                   </div>

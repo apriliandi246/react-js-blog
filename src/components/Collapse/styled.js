@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CollapseIcon = styled.i`
    float: right;
@@ -54,7 +54,7 @@ export const CollapseContent = styled.div`
    box-sizing: border-box;
    font-family: monospace;
    color: ${({ theme }) => theme.fontColor};
-   display: ${(props) => props.displayValue};
+   display: none;
    box-shadow: ${({ theme }) => theme.collapseBoxShadow};
    border-left: ${({ theme }) => theme.collapseBorderContent};
    border-right: ${({ theme }) => theme.collapseBorderContent};
