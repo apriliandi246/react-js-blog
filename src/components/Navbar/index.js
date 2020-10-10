@@ -1,11 +1,10 @@
 import React from "react";
 import { NavbarStyle, NavbarLogo } from "./styled";
 
-
-export default function Navbar({ changeTheme }) {
+export const Navbar = React.memo(({ changeTheme }) => {
    return (
       <NavbarStyle>
          <NavbarLogo onClick={changeTheme} />
       </NavbarStyle>
    );
-}
+});

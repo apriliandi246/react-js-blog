@@ -5,11 +5,10 @@ import { ThemeProvider } from "styled-components";
 import axios from "axios";
 import { Time } from "../../utils/time";
 import Spinner from "../Spinner";
-import { darkTheme, lightTheme } from "../Theme/index"
+import { darkTheme, lightTheme } from "../Theme/index";
 import { GlobalStyle } from "./styled";
 import "./style.css";
 import { apiEndpoint } from "../../config.json";
-
 
 export default function Article({ history, match }) {
    const CancelToken = axios.CancelToken;
@@ -18,9 +17,10 @@ export default function Article({ history, match }) {
    const [theme] = React.useState(window.localStorage.getItem("theme"));
 
    React.useEffect(() => {
-      axios.get(`${apiEndpoint}/slug${match.url}`, {
-         cancelToken: source.token
-      })
+      axios
+         .get(`${apiEndpoint}/slug${match.url}`, {
+            cancelToken: source.token,
+         })
          .then((response) => {
             setArticle(response.data);
          })
@@ -32,7 +32,7 @@ export default function Article({ history, match }) {
 
       return () => {
          source.cancel();
-      }
+      };
    });
 
    return (
@@ -50,18 +50,20 @@ export default function Article({ history, match }) {
                </Link>
             </div>
 
-            {article.length === 0 ? <Spinner /> : (
+            {article.length === 0 ? (
+               <Spinner />
+            ) : (
                <div className="container-article">
                   <div className="head">
                      <h1 className="head__title">{article[0].title}</h1>
-                     <p className="head__published">{new Time(article[0].createdAt).format("medium")}</p>
+                     <p className="head__published">
+                        {new Time(article[0].createdAt).format("medium")}
+                     </p>
                      <span className="head__tag">{article[0].tag}</span>
                   </div>
 
                   <div className="article-body">
-                     <ReactMarkdown
-                        source={article[0].markdown}
-                     />
+                     <ReactMarkdown source={article[0].markdown} />
                   </div>
                </div>
             )}

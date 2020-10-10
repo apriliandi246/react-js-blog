@@ -10,7 +10,7 @@ export const lightTheme = {
    collapseBorderContent: "1px solid #f3ebea",
    collapseBoxShadow: "0 0 1px 1px #0000001a",
    navbarBoxShadow: "0 0 1.2px 1.2px #0000001a",
-}
+};
 
 export const darkTheme = {
    collapseBorderContent: "1px solid #253341",
@@ -24,4 +24,4 @@ export const darkTheme = {
    collapseBoxShadow: "none",
    fontColor: "#ffffff",
    body: "#15202b",
-}
+};

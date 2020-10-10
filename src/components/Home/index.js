@@ -1,59 +1,63 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
-import Navbar from "../Navbar/index";
+import { Navbar } from "../Navbar/index";
 import Collapse from "../Collapse/index";
 import Articles from "../Articles/index";
+import NoArticle from "../NoArticle";
 import { apiEndpoint } from "../../config.json";
 import { GlobalStyle } from "./styled";
 import { lightTheme, darkTheme } from "../Theme/index";
 import "./style.css";
 
-
 export default function Home() {
    const CancelToken = axios.CancelToken;
-   const source = CancelToken.source();
+   const [theme, setTheme] = React.useState(
+      window.localStorage.getItem("theme")
+   );
    const [articles, setArticles] = React.useState([]);
-   const [articleTag, setArticleTag] = React.useState("");
-   const [theme, setTheme] = React.useState(window.localStorage.getItem("theme"));
+   const [isHasTag, setIsHasTag] = React.useState(false);
+   const [articlesTag, setArticlesTag] = React.useState([]);
 
    React.useEffect(() => {
-      if (articleTag === "") {
-         getAllArticles(apiEndpoint);
+      let cancel;
 
-      } else {
-         getAllArticles(`${apiEndpoint}/tag/${articleTag}`);
+      async function fetchData() {
+         try {
+            const result = await axios(apiEndpoint, {
+               cancelToken: new CancelToken(function (c) {
+                  cancel = c;
+               }),
+            });
+            setArticles(result.data);
+         } catch {
+            return <NoArticle />;
+         }
       }
+
+      fetchData();
 
       return () => {
-         source.cancel();
-      }
-   });
+         cancel();
+      };
+   }, [CancelToken]);
 
-   function chooseAllArticles() {
-      setArticleTag("");
-      getAllArticles(apiEndpoint);
-   }
+   const changeTheme = React.useCallback(() => {
+      window.localStorage.setItem(
+         "theme",
+         theme === "light" ? "dark" : "light"
+      );
+      setTheme(window.localStorage.getItem("theme"));
+   }, [theme]);
 
    function chooseArticleTag(tag) {
-      setArticleTag(tag);
+      const result = articles.filter((article) => article.tag === tag);
+      setArticlesTag(result);
+      setIsHasTag(true);
    }
 
-   function changeTheme() {
-      window.localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-      setTheme(window.localStorage.getItem("theme"));
-   }
-
-   function getAllArticles(endpoint) {
-      axios.get(endpoint, {
-         cancelToken: source.token
-      })
-         .then((response) => {
-            setArticles(response.data);
-         })
-         .catch((ex) => {
-
-         });
+   function chooseAllrticles() {
+      setIsHasTag(false);
    }
 
    return (
@@ -67,12 +71,12 @@ export default function Home() {
                <Collapse
                   theme={theme}
                   chooseArticleTag={chooseArticleTag}
-                  chooseAllrticles={chooseAllArticles}
+                  chooseAllrticles={chooseAllrticles}
                />
 
                <Articles
                   theme={theme}
-                  articles={articles}
+                  articles={isHasTag === true ? articlesTag : articles}
                />
             </div>
          </React.Fragment>
