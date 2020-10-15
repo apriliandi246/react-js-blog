@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Logo from "./logo.png";
+import Logo from "./img/logo.png";
 
-export const NavbarStyle = styled.nav` 
+export const NavbarStyle = styled.nav`
    top: 0;
    left: 0;
    right: 0;

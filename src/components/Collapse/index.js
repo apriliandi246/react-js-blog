@@ -7,12 +7,9 @@ import {
    CollapseTag,
 } from "./styled";
 
-export default function Collapse({
-   theme,
-   chooseArticleTag,
-   chooseAllrticles,
-}) {
+export default function Collapse({ chooseArticleTag, chooseAllrticles }) {
    const collapseContentRef = React.useRef(null);
+
    const tags = React.useRef([
       "html",
       "css",
@@ -46,16 +43,12 @@ export default function Collapse({
 
          <CollapseContent ref={collapseContentRef}>
             <CollapseTags>
-               <CollapseTag onClick={chooseAllrticles} theme={theme}>
+               <CollapseTag onClick={chooseAllrticles}>
                   all-articles
                </CollapseTag>
 
                {tags.current.map((tag) => (
-                  <CollapseTag
-                     key={tag}
-                     onClick={() => chooseArticleTag(tag)}
-                     theme={theme}
-                  >
+                  <CollapseTag key={tag} onClick={() => chooseArticleTag(tag)}>
                      {tag}
                   </CollapseTag>
                ))}

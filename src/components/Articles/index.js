@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NoArticle from "../NoArticle/index";
+import NoArticle from "../NoArticle";
 import { Time } from "../../utils/time";
 import { ArticleContainer } from "./styled";
-import "./style.css";
+import "./css/style.css";
 
-export default function Articles({ articles, theme }) {
+export default function Articles({ theme, articles }) {
    return (
       <React.Fragment>
          {articles.length === 0 ? (
@@ -19,7 +19,7 @@ export default function Articles({ articles, theme }) {
                            to={`/${article.slug}`}
                            className="article__title"
                            style={{
-                              color: theme === "light" ? "#000000" : null,
+                              color: theme === "light" ? "#000000" : "#ffffff",
                            }}
                         >
                            {article.title}
@@ -33,7 +33,10 @@ export default function Articles({ articles, theme }) {
                            className="article__line"
                            style={{
                               border:
-                                 theme === "light" ? "1px solid #dfdfdf" : null,
+                                 window.localStorage.getItem("theme") ===
+                                 "light"
+                                    ? "1px solid #dfdfdf"
+                                    : null,
                            }}
                         />
                      </div>

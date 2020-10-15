@@ -1,14 +1,14 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
-import { Navbar } from "../Navbar/index";
-import Collapse from "../Collapse/index";
-import Articles from "../Articles/index";
+import Navbar from "../Navbar";
+import Collapse from "../Collapse";
+import Articles from "../Articles";
 import NoArticle from "../NoArticle";
 import { apiEndpoint } from "../../config.json";
 import { GlobalStyle } from "./styled";
-import { lightTheme, darkTheme } from "../Theme/index";
-import "./style.css";
+import { lightTheme, darkTheme } from "../Theme";
+import "./css/style.css";
 
 export default function Home() {
    const CancelToken = axios.CancelToken;
@@ -42,14 +42,6 @@ export default function Home() {
       };
    }, [CancelToken]);
 
-   const changeTheme = React.useCallback(() => {
-      window.localStorage.setItem(
-         "theme",
-         theme === "light" ? "dark" : "light"
-      );
-      setTheme(window.localStorage.getItem("theme"));
-   }, [theme]);
-
    function chooseArticleTag(tag) {
       const result = articles.filter((article) => article.tag === tag);
       setArticlesTag(result);
@@ -58,6 +50,14 @@ export default function Home() {
 
    function chooseAllrticles() {
       setIsHasTag(false);
+   }
+
+   function changeTheme() {
+      window.localStorage.setItem(
+         "theme",
+         theme === "light" ? "dark" : "light"
+      );
+      setTheme(window.localStorage.getItem("theme"));
    }
 
    return (
@@ -69,7 +69,6 @@ export default function Home() {
 
             <div className="container-home">
                <Collapse
-                  theme={theme}
                   chooseArticleTag={chooseArticleTag}
                   chooseAllrticles={chooseAllrticles}
                />
