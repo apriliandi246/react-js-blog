@@ -11,34 +11,7 @@ import "./css/style.css";
 import { apiEndpoint } from "../../config.json";
 
 export default function Article({ history, match }) {
-   const CancelToken = axios.CancelToken;
-   const [article, setArticle] = React.useState([]);
-
-   React.useEffect(() => {
-      let cancel;
-
-      async function fetchData() {
-         try {
-            const result = await axios(`${apiEndpoint}/slug${match.url}`, {
-               cancelToken: new CancelToken(function (c) {
-                  cancel = c;
-               }),
-            });
-
-            setArticle(result.data);
-         } catch (ex) {
-            if (ex.response && ex.response.status === 404) {
-               history.push("/");
-            }
-         }
-      }
-
-      fetchData();
-
-      return () => {
-         cancel();
-      };
-   }, [CancelToken, history, match]);
+   const article = useFetchArticle(`${apiEndpoint}/slug${match.url}`, history);
 
    return (
       <ThemeProvider
@@ -88,4 +61,37 @@ export default function Article({ history, match }) {
          </React.Fragment>
       </ThemeProvider>
    );
+}
+
+function useFetchArticle(link, history) {
+   const CancelToken = axios.CancelToken;
+   const [article, setArticle] = React.useState([]);
+
+   React.useEffect(() => {
+      let cancel;
+
+      async function fetchData() {
+         try {
+            const result = await axios(link, {
+               cancelToken: new CancelToken(function (c) {
+                  cancel = c;
+               }),
+            });
+
+            setArticle(result.data);
+         } catch (ex) {
+            if (ex.response && ex.response.status === 404) {
+               history.push("/");
+            }
+         }
+      }
+
+      fetchData();
+
+      return () => {
+         cancel();
+      };
+   }, [CancelToken, link, history]);
+
+   return article;
 }
