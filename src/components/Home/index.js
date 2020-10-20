@@ -1,22 +1,29 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
+import { useQuery } from "react-query";
 import Navbar from "../Navbar";
 import Collapse from "../Collapse";
 import Articles from "../Articles";
-import NoArticle from "../NoArticle";
+import Spinner from "../Spinner";
 import { apiEndpoint } from "../../config.json";
 import { GlobalStyle } from "./styled";
 import { lightTheme, darkTheme } from "../Theme";
 import "./css/style.css";
 
+async function fetchArticles() {
+   const result = await axios.get(apiEndpoint);
+   return result.data;
+}
+
 export default function Home() {
    const [theme, setTheme] = React.useState(
       window.localStorage.getItem("theme")
    );
-   const articles = useFetchArticles(apiEndpoint);
+
    const [isHasTag, setIsHasTag] = React.useState(false);
    const [articlesTag, setArticlesTag] = React.useState([]);
+   const { data: articles, status } = useQuery("articles", fetchArticles);
 
    function chooseArticleTag(tag) {
       const result = articles.filter((article) => article.tag === tag);
@@ -34,6 +41,10 @@ export default function Home() {
          theme === "light" ? "dark" : "light"
       );
       setTheme(window.localStorage.getItem("theme"));
+   }
+
+   if (status === "loading") {
+      return <Spinner />;
    }
 
    return (
@@ -57,34 +68,4 @@ export default function Home() {
          </React.Fragment>
       </ThemeProvider>
    );
-}
-
-function useFetchArticles(link) {
-   const CancelToken = axios.CancelToken;
-   const [articles, setArticles] = React.useState([]);
-
-   React.useEffect(() => {
-      let cancel;
-
-      async function fetchData() {
-         try {
-            const result = await axios(link, {
-               cancelToken: new CancelToken(function (c) {
-                  cancel = c;
-               }),
-            });
-            setArticles(result.data);
-         } catch {
-            return <NoArticle />;
-         }
-      }
-
-      fetchData();
-
-      return () => {
-         cancel();
-      };
-   }, [CancelToken, link]);
-
-   return articles;
 }

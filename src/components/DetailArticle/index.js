@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
+import { useQuery } from "react-query";
 import { Time } from "../../utils/time";
 import Spinner from "../Spinner";
 import { darkTheme, lightTheme } from "../Theme";
@@ -10,8 +11,16 @@ import { GlobalStyle } from "./styled";
 import "./css/style.css";
 import { apiEndpoint } from "../../config.json";
 
+async function fetchArticle(key, slug) {
+   const result = await axios.get(`${apiEndpoint}/slug${slug}`);
+   return result.data;
+}
+
 export default function Article({ history, match }) {
-   const article = useFetchArticle(`${apiEndpoint}/slug${match.url}`, history);
+   const { data: article, status } = useQuery(
+      ["article", match.url],
+      fetchArticle
+   );
 
    return (
       <ThemeProvider
@@ -39,7 +48,7 @@ export default function Article({ history, match }) {
                </Link>
             </div>
 
-            {article.length === 0 ? (
+            {status === "loading" ? (
                <Spinner />
             ) : (
                <div className="container-article">
@@ -61,37 +70,4 @@ export default function Article({ history, match }) {
          </React.Fragment>
       </ThemeProvider>
    );
-}
-
-function useFetchArticle(link, history) {
-   const CancelToken = axios.CancelToken;
-   const [article, setArticle] = React.useState([]);
-
-   React.useEffect(() => {
-      let cancel;
-
-      async function fetchData() {
-         try {
-            const result = await axios(link, {
-               cancelToken: new CancelToken(function (c) {
-                  cancel = c;
-               }),
-            });
-
-            setArticle(result.data);
-         } catch (ex) {
-            if (ex.response && ex.response.status === 404) {
-               history.push("/");
-            }
-         }
-      }
-
-      fetchData();
-
-      return () => {
-         cancel();
-      };
-   }, [CancelToken, link, history]);
-
-   return article;
 }
