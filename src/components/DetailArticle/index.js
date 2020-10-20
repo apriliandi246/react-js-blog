@@ -9,10 +9,11 @@ import Spinner from "../Spinner";
 import { darkTheme, lightTheme } from "../Theme";
 import { GlobalStyle } from "./styled";
 import "./css/style.css";
-import { apiEndpoint } from "../../config.json";
 
 async function fetchArticle(key, slug) {
-   const result = await axios.get(`${apiEndpoint}/slug${slug}`);
+   const result = await axios.get(
+      `http://localhost:4000/api/articles/slug${slug}`
+   );
    return result.data;
 }
 

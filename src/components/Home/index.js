@@ -6,13 +6,12 @@ import Navbar from "../Navbar";
 import Collapse from "../Collapse";
 import Articles from "../Articles";
 import Spinner from "../Spinner";
-import { apiEndpoint } from "../../config.json";
 import { GlobalStyle } from "./styled";
 import { lightTheme, darkTheme } from "../Theme";
 import "./css/style.css";
 
 async function fetchArticles() {
-   const result = await axios.get(apiEndpoint);
+   const result = await axios.get("http://localhost:4000/api/articles");
    return result.data;
 }
 
